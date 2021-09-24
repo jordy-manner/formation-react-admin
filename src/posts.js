@@ -20,6 +20,7 @@ const postFilters = [
   </ReferenceInput>,
 ];
 
+
 export const PostList = props => (
     <List filters={postFilters} {...props}>
       <Datagrid>
