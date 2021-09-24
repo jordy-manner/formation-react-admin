@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useMediaQuery } from '@material-ui/core'
+import {useMediaQuery} from '@material-ui/core'
 import {
   List,
   SimpleList,
@@ -13,12 +13,16 @@ import {
   ReferenceInput,
   SelectInput,
   TextInput,
+  Show,
+  SimpleShowLayout,
+  RichTextField,
+  DateField
 } from 'react-admin';
 
 const postFilters = [
-  <TextInput source="q" label="Search" alwaysOn />,
+  <TextInput source="q" label="Search" alwaysOn/>,
   <ReferenceInput source="userId" label="User" reference="users" allowEmpty>
-    <SelectInput optionText="name" />
+    <SelectInput optionText="name"/>
   </ReferenceInput>,
 ];
 
@@ -35,14 +39,14 @@ export const PostList = props => {
                 tertiaryText={record => new Date().toLocaleDateString()}
             />
         ) : (
-        <Datagrid>
-          <TextField source="id"/>
-          <ReferenceField source="userId" reference="users">
-            <TextField source="name"/>
-          </ReferenceField>
-          <TextField source="title"/>
-          <EditButton/>
-        </Datagrid>
+            <Datagrid>
+              <TextField source="id"/>
+              <ReferenceField source="userId" reference="users">
+                <TextField source="name"/>
+              </ReferenceField>
+              <TextField source="title"/>
+              <EditButton/>
+            </Datagrid>
         )}
       </List>
   )
@@ -53,7 +57,7 @@ const PostTitle = ({record}) => {
 }
 
 export const PostEdit = props => (
-    <Edit title={<PostTitle />} {...props}>
+    <Edit title={<PostTitle/>} {...props}>
       <SimpleForm>
         <TextInput disabled source="id"/>
         <ReferenceInput source="userId" reference="users">
@@ -76,3 +80,13 @@ export const PostCreate = props => (
       </SimpleForm>
     </Create>
 );
+
+export const PostShow = (props) => (
+    <Show {...props}>
+      <SimpleShowLayout>
+        <TextField source="title"/>
+        <TextField source="teaser"/>
+        <RichTextField source="body"/>
+      </SimpleShowLayout>
+    </Show>
+)
